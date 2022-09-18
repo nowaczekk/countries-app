@@ -2,7 +2,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, of, switchMap} from 'rxjs';
-import { HttpService } from 'src/app/shared/services/http.service';
+import { CountryDataService } from 'src/app/shared/services/country-data.service';
 
 export type CountryExtendedModel = {
   name: {
@@ -23,10 +23,9 @@ export type CountryExtendedModel = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SingleItemComponent implements OnInit {
-  countryCode = '';
-  countryData$!: Observable<any>;
+  countryData$!: Observable<CountryExtendedModel[] | null>;
 
-  constructor(private httpService: HttpService, private activatedRoute: ActivatedRoute){
+  constructor(private countryDataService: CountryDataService, private activatedRoute: ActivatedRoute){
 
   }
 
@@ -34,18 +33,10 @@ export class SingleItemComponent implements OnInit {
     this.countryData$ = this.activatedRoute.params.pipe(switchMap((params: Params)=> {
       if(!params) return of(null);
 
-      this.countryCode = params['id'];
+      const countryCode = params['id'];
 
-      return this.getCountryDataByCode(this.countryCode);
+      return this.countryDataService.getCountryDataByCode(countryCode);
     }))
 
-
   }
-
-  getCountryDataByCode(code: string): Observable<any> {
-    const url = 'https://restcountries.com/v3.1/alpha/'+ code;
-
-    return this.httpService.get(url);
-  }
-
 }

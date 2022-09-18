@@ -1,7 +1,7 @@
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable, tap } from 'rxjs';
-import { HttpService } from 'src/app/shared/services/http.service';
+import { Observable } from 'rxjs';
+import { CountryDataService } from 'src/app/shared/services/country-data.service';
 
 export type CountryModel = {
   name: string,
@@ -20,16 +20,9 @@ export type CountryModel = {
 export class ListComponent {
   allCountries$!: Observable<CountryModel[]>;
 
-  constructor(private httpService: HttpService){
-  }
+  constructor(private countryDataService: CountryDataService){}
 
   ngOnInit(): void {
-    this.allCountries$ = this.getListData();
-  }
-
-  getListData(): Observable<CountryModel[]> {
-    const url = 'https://restcountries.com/v2/all';
-
-    return  this.httpService.get(url)
+    this.allCountries$ = this.countryDataService.getListData();
   }
 }
