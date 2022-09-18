@@ -1,0 +1,23 @@
+<div class="top-bar">
+  <a routerLink="">Go Back</a>
+</div>
+
+<div class="single-item f-center-both ">
+  <div *ngFor="let countryData of countryData$ | async" class="single-item__content shadow">
+    <div>{{countryData.name?.common}}</div>
+
+    <div class="subtitle" *ngIf="countryData.altSpellings">
+      <span *ngFor="let altSpelling of countryData.altSpellings">
+        {{altSpelling}}
+      </span>
+    </div>
+
+    <div *ngIf="countryData.flags">
+      <img [src]="countryData.flags.png">
+    </div>
+
+    <span *ngIf="countryData.subregion">Region: {{countryData.subregion}}</span>
+
+    <div *ngIf="countryData.capital?.[0]">Captial city: {{countryData.capital?.[0]}}</div>
+  </div>
+</div>

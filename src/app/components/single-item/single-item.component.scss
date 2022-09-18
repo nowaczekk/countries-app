@@ -1,0 +1,25 @@
+$single-item-top-bar-height: 50px;
+
+.top-bar {
+    height: $single-item-top-bar-height;
+}
+
+.single-item {
+    width: 100%;
+    height: 100%;
+    height: calc(100vh - $single-item-top-bar-height);
+
+    &__content {
+        padding: 24px 32px;
+        border-radius: 4px;
+    }
+
+    img {
+        margin: 8px 0;
+    }
+
+    .subtitle {
+        opacity: 0.9;
+        font-size: 0.8rem;
+    }
+}
