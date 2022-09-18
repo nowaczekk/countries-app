@@ -12,12 +12,12 @@
       </span>
     </div>
 
-    <div *ngIf="countryData.flags">
-      <img [src]="countryData.flags.png">
+    <div *ngIf="countryData?.flags">
+      <img [src]="countryData?.flags?.png">
     </div>
 
     <span *ngIf="countryData.subregion">Region: {{countryData.subregion}}</span>
 
-    <div *ngIf="countryData.capital?.[0]">Captial city: {{countryData.capital?.[0]}}</div>
+    <div *ngIf="countryData.capital?.[0]">Captial city: {{countryData?.capital?.[0]}}</div>
   </div>
 </div>

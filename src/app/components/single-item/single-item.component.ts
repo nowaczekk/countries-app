@@ -11,7 +11,9 @@ export type CountryExtendedModel = {
   alpha3Code: string, 
   region: string, 
   subregion: string,
-  flag: string,
+  flags: {
+    png: string
+  },
   capital: string[],
   altSpellings: string [],
 }
@@ -23,7 +25,7 @@ export type CountryExtendedModel = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SingleItemComponent implements OnInit {
-  countryData$!: Observable<CountryExtendedModel[] | null>;
+  countryData$!: Observable<CountryExtendedModel[]>;
 
   constructor(private countryDataService: CountryDataService, private activatedRoute: ActivatedRoute){
 
@@ -31,7 +33,7 @@ export class SingleItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.countryData$ = this.activatedRoute.params.pipe(switchMap((params: Params)=> {
-      if(!params) return of(null);
+      if(!params) return of([]);
 
       const countryCode = params['id'];
 
