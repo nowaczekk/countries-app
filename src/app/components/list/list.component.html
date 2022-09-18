@@ -1,0 +1,11 @@
+<div class="list-component">
+  <div class="list-component__item country__container shadow" *ngFor="let country of allCountries$ | async">
+    <img class="country__flag" [src]="country.flag">
+
+    <div class="country__info">
+      <a [routerLink]="[country.alpha3Code]">{{country.name}}</a>
+
+      <span class="text-ellipsis">{{country.capital}}</span>
+    </div>
+  </div>
+</div>
